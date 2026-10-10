@@ -36,13 +36,36 @@ body{min-height:100svh;overflow-x:hidden}
 }
 @media (prefers-reduced-motion:reduce){.landing-cta{transition:none}}
 
-/* v57.1 cinematic entrance: 2.6-second image reveal, no video or JavaScript. */
-@keyframes novaxLandingCinematic{0%{opacity:.48;transform:scale(1.035);filter:brightness(.78)}38%{opacity:.88;filter:brightness(.94)}100%{opacity:1;transform:scale(1);filter:brightness(1)}}
-.landing-art{transform-origin:center center;animation:novaxLandingCinematic 2.6s cubic-bezier(.2,.65,.25,1) both;will-change:opacity,transform,filter}
+/* v57.2 cinematic entrance: layered energy reveal, CSS-only and reduced-motion aware. */
+@keyframes novaxLandingCinematic{
+  0%{opacity:.35;transform:scale(1.075) translateY(1.2%);filter:brightness(.56) saturate(.8)}
+  16%{opacity:.78;transform:scale(1.045) translateY(.4%);filter:brightness(.82) saturate(1.05)}
+  22%{filter:brightness(1.45) saturate(1.25)}
+  29%{filter:brightness(.94) saturate(1.08)}
+  46%{opacity:1;transform:scale(1.018);filter:brightness(1.03) saturate(1.08)}
+  72%{transform:scale(1.006);filter:brightness(1.01)}
+  100%{opacity:1;transform:scale(1);filter:brightness(1) saturate(1)}
+}
+@keyframes novaxEnergyRing{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.36) rotate(-12deg)}
+  18%{opacity:.95;transform:translate(-50%,-50%) scale(.72) rotate(4deg)}
+  38%{opacity:.82;transform:translate(-50%,-50%) scale(1.18) rotate(0)}
+  58%{opacity:.24;transform:translate(-50%,-50%) scale(1.55) rotate(8deg)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.8) rotate(8deg)}
+}
+@keyframes novaxEnergySweep{
+  0%,13%{opacity:0;transform:translateX(-120%) skewX(-16deg)}
+  22%{opacity:.8}
+  34%{opacity:.3;transform:translateX(125%) skewX(-16deg)}
+  42%,100%{opacity:0;transform:translateX(125%) skewX(-16deg)}
+}
+.landing-art{transform-origin:center center;animation:novaxLandingCinematic 4.6s cubic-bezier(.18,.68,.16,1) both;will-change:opacity,transform,filter}
+.landing-stage::before{content:"";position:absolute;z-index:1;left:50%;top:51%;width:clamp(220px,37vw,680px);height:clamp(74px,12vw,210px);border-radius:50%;border:2px solid rgba(32,216,255,.45);background:transparent;box-shadow:0 0 18px rgba(32,216,255,.18),inset 0 0 24px rgba(147,71,255,.12);pointer-events:none;animation:novaxEnergyRing 4.6s cubic-bezier(.18,.68,.16,1) both}
+.landing-stage::after{content:"";position:absolute;z-index:2;top:-20%;bottom:-20%;left:-35%;width:24%;background:linear-gradient(90deg,transparent,rgba(99,218,255,.12),rgba(255,255,255,.5),rgba(166,105,255,.18),transparent);filter:blur(9px);mix-blend-mode:screen;pointer-events:none;animation:novaxEnergySweep 4.6s ease-out both}
 .landing-cta{transition:box-shadow .22s ease,filter .22s ease,background-color .22s ease}
 .landing-cta:hover,.landing-cta:focus-visible{box-shadow:0 0 18px rgba(32,216,255,.36),0 0 36px rgba(125,76,255,.24);background:rgba(32,216,255,.035)}
 .landing-cta:active{filter:brightness(1.12)}
-@media(prefers-reduced-motion:reduce){.landing-art{animation:none!important;transform:none!important;filter:none!important}.landing-cta{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.landing-art{animation:none!important;transform:none!important;filter:none!important}.landing-stage::before,.landing-stage::after{animation:none!important;display:none!important}.landing-cta{transition:none!important}}
 
 </style>
 </head>
