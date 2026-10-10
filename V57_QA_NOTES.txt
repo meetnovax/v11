@@ -1,0 +1,3 @@
+v57 QA notes
+============
+Automated source checks performed: HTML/JS edits were applied to the v56 source tree; the quiz scoring function and question definitions were not edited. Please run through a fresh quiz for each of the five archetypes on the deployed preview before production launch. Browser-level testing with live storage, sharing APIs, invite QR endpoint, and cross-device rendering was not available in this build environment.

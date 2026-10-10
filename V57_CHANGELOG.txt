@@ -1,0 +1,8 @@
+NovaX v57 — integration pass
+============================
+- Integrated v4 approved vertical Builder Card artwork into the results presentation with dynamic archetype, name, score, strengths, and card export rendering.
+- Added a cohesive set of five archetype icon assets for Visionary, Hustler, Creator, Network, and Future.
+- Applied the supplied transparent NovaX logo through the existing canonical asset path.
+- Audited and tightened all five heroDescription entries to exactly one sentence; removed dash-before-and constructions while preserving archetype meaning and NovaX™ terminology.
+- Added lightweight entrance motion and CTA/card hover feedback with reduced-motion support.
+- Quiz question/answer data, scoring weights, tie-break logic, and archetype assignment were not intentionally modified.
