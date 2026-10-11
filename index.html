@@ -101,21 +101,20 @@ body{min-height:100svh;overflow-x:hidden}
 @media(prefers-reduced-motion:reduce){.assembly-sequence{display:none!important}}
 
 
-/* Actual Concept 2 mechanical-assembly animation as a first-visit page-load intro. */
-.novax-intro{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#030a16;opacity:1;visibility:visible;transition:opacity .55s ease,visibility .55s ease}
+/* Stage 2: Concept 2 intro + X-to-homepage transition (video overlay). The last video frame is the real homepage art,
+   sized exactly like .landing-art, so removing the overlay causes no visible jump. */
+.novax-intro{position:fixed;inset:0;overflow:hidden;z-index:9999;display:flex;align-items:center;justify-content:center;background:#030a16;opacity:1;visibility:visible;transition:opacity .45s ease,visibility .45s ease}
 .novax-intro.is-done{opacity:0;visibility:hidden;pointer-events:none}
-.novax-intro__video{display:block;width:100%;height:100%;object-fit:contain;background:#030a16}
+.novax-intro__video{display:block;background:#030a16;flex:0 0 auto;height:100svh;width:calc(100svh * 2 / 3);max-width:none}
+@media (min-width:768px) and (orientation:landscape){.novax-intro__video{width:100vw;height:min(100svh,56.32775vw);max-height:100svh;object-fit:fill}}
 .novax-intro__skip{position:absolute;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));padding:10px 14px;border:1px solid rgba(255,255,255,.35);border-radius:999px;background:rgba(3,10,22,.72);color:#fff;font:600 11px/1 Arial,sans-serif;letter-spacing:.12em;cursor:pointer}
 .novax-intro__skip:focus-visible{outline:2px solid #fff;outline-offset:3px}
 @media(prefers-reduced-motion:reduce){.novax-intro{display:none!important}}
-
 </style>
 </head>
 <body>
 <div class="novax-intro" id="novaxIntro" role="presentation" aria-label="NovaX introduction">
-  <video id="novaxIntroVideo" class="novax-intro__video" autoplay muted playsinline preload="auto" aria-hidden="true">
-    <source src="assets/novax-concept2-intro-1080p.mp4" type="video/mp4">
-  </video>
+  <video id="novaxIntroVideo" class="novax-intro__video" muted playsinline preload="auto" aria-hidden="true"></video>
   <button class="novax-intro__skip" id="novaxIntroSkip" type="button" aria-label="Skip introduction">SKIP INTRO</button>
 </div>
 <main class="landing-page" aria-label="NovaX™ landing page">
@@ -136,21 +135,39 @@ body{min-height:100svh;overflow-x:hidden}
 </main>
 <script>
 (function(){
-  const overlay=document.getElementById('novaxIntro');
-  const video=document.getElementById('novaxIntroVideo');
-  const skip=document.getElementById('novaxIntroSkip');
+  var overlay=document.getElementById('novaxIntro');
+  var video=document.getElementById('novaxIntroVideo');
+  var skip=document.getElementById('novaxIntroSkip');
   if(!overlay||!video)return;
-  const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let finished=false;
-  function finish(){if(finished)return;finished=true;overlay.classList.add('is-done');window.setTimeout(()=>{overlay.remove();},650);try{video.pause();}catch(e){}}
-  if(reduced){finish();return;}
+  var finished=false,started=false,timers=[];
+  function finish(){
+    if(finished)return;finished=true;
+    timers.forEach(clearTimeout);
+    overlay.classList.add('is-done');               // fades out over the identical homepage frame
+    try{sessionStorage.setItem('novax_intro_seen','1');}catch(e){}
+    setTimeout(function(){try{video.pause();}catch(e){}overlay.remove();},600);
+  }
+  var mq=function(q){return window.matchMedia&&window.matchMedia(q).matches;};
+  var reduced=mq('(prefers-reduced-motion: reduce)');
+  var seen=false;try{seen=sessionStorage.getItem('novax_intro_seen')==='1';}catch(e){}
+  var force=/[?&]intro=1(&|$)/.test(location.search);   // ?intro=1 replays the intro
+  if(reduced||(seen&&!force)){finish();return;}
+  // Same breakpoint the page CSS uses to choose the portrait vs landscape homepage art.
+  var portrait=mq('(max-width:767px),(orientation:portrait)');
   video.addEventListener('ended',finish,{once:true});
   video.addEventListener('error',finish,{once:true});
-  skip&&skip.addEventListener('click',finish);
-  // Some browsers may block autoplay; don't hold the homepage behind a stalled intro.
-  const timeout=window.setTimeout(finish,7500);
-  video.addEventListener('ended',()=>window.clearTimeout(timeout),{once:true});
-  const play=video.play();if(play&&typeof play.catch==='function')play.catch(finish);
+  video.addEventListener('playing',function(){started=true;},{once:true});
+  if(skip)skip.addEventListener('click',finish);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')finish();});
+  // Never hold the homepage hostage: bail out if playback has not started in 4 s, or after 14 s regardless.
+  timers.push(setTimeout(function(){if(!started)finish();},4000));
+  timers.push(setTimeout(finish,14000));
+  // MP4 (H.264) first; WebM (VP9) only for browsers without H.264 (e.g. some Chromium/Linux builds).
+  var base='assets/novax-intro-transition-'+(portrait?'portrait':'1080p');
+  var ext=video.canPlayType('video/mp4; codecs="avc1.42E01E"')?'.mp4':(video.canPlayType('video/webm; codecs="vp9"')?'.webm':'');
+  if(!ext){finish();return;}
+  video.src=base+ext;
+  var p=video.play();if(p&&typeof p.catch==='function')p.catch(finish);
 })();
 </script>
 </body>
