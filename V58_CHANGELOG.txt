@@ -1,0 +1,8 @@
+NovaX v58 changes
+
+- Simplified Results header to logo/tagline and Hub profile/avatar only.
+- Reworked Results flow to hero, Builder Card, divider, invite-link note, and Continue Your Journey CTA.
+- Removed Builder Profile, Invite Progress, Three Paths, Next Step, and extra strength/challenge/direction panels from visible Results markup.
+- Improved Builder Card motivational-copy readability, responsive typography, spacing, and internal fluid layout.
+- Preserved existing homepage composition and refined the CSS-only cinematic intro timing/effects for responsive visibility and reduced-motion support.
+- Preserved quiz/scoring/archetype data and share/save/QR handlers.

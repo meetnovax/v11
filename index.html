@@ -34,16 +34,23 @@ body{min-height:100svh;overflow-x:hidden}
  .landing-tagline{top:10.55%;font-size:clamp(8px,1.05vw,13px);letter-spacing:.25em}
  .landing-cta{left:25.6%;top:48.0%;width:48.5%;height:6.0%}
 }
+@media (max-width:767px),(orientation:portrait){
+ .landing-art{animation-duration:4.6s;will-change:opacity,transform,filter}
+ .landing-stage::before{width:clamp(190px,66vw,420px);height:clamp(66px,23vw,145px);top:50%}
+ .landing-stage::after{width:32%;filter:blur(7px)}
+}
 @media (prefers-reduced-motion:reduce){.landing-cta{transition:none}}
 
 /* v57.2 cinematic entrance: layered energy reveal, CSS-only and reduced-motion aware. */
 @keyframes novaxLandingCinematic{
-  0%{opacity:.35;transform:scale(1.075) translateY(1.2%);filter:brightness(.56) saturate(.8)}
-  16%{opacity:.78;transform:scale(1.045) translateY(.4%);filter:brightness(.82) saturate(1.05)}
-  22%{filter:brightness(1.45) saturate(1.25)}
-  29%{filter:brightness(.94) saturate(1.08)}
-  46%{opacity:1;transform:scale(1.018);filter:brightness(1.03) saturate(1.08)}
-  72%{transform:scale(1.006);filter:brightness(1.01)}
+  /* Concept 2-inspired staged assembly: components settle, energy locks, then the mark resolves. */
+  0%{opacity:.18;transform:scale(1.09) translate3d(0,1.6%,0) rotate(-.35deg);filter:brightness(.38) saturate(.68) contrast(1.08)}
+  12%{opacity:.55;transform:scale(1.065) translate3d(0,.9%,0) rotate(.18deg);filter:brightness(.68) saturate(.9)}
+  24%{opacity:.86;transform:scale(1.035) translate3d(0,-.25%,0) rotate(-.08deg);filter:brightness(1.22) saturate(1.15)}
+  31%{transform:scale(1.018) translate3d(0,.12%,0) rotate(0);filter:brightness(1.62) saturate(1.22) contrast(1.03)}
+  39%{transform:scale(1.024) translate3d(0,0,0);filter:brightness(.94) saturate(1.08)}
+  56%{opacity:1;transform:scale(1.012);filter:brightness(1.07) saturate(1.1)}
+  76%{transform:scale(1.004);filter:brightness(1.015)}
   100%{opacity:1;transform:scale(1);filter:brightness(1) saturate(1)}
 }
 @keyframes novaxEnergyRing{
@@ -67,13 +74,55 @@ body{min-height:100svh;overflow-x:hidden}
 .landing-cta:active{filter:brightness(1.12)}
 @media(prefers-reduced-motion:reduce){.landing-art{animation:none!important;transform:none!important;filter:none!important}.landing-stage::before,.landing-stage::after{animation:none!important;display:none!important}.landing-cta{transition:none!important}}
 
+
+/* v58 Concept 2: Mechanical Assembly — separate layered CSS motion over the preserved homepage art. */
+.landing-stage{isolation:isolate}
+.landing-art{position:relative;z-index:0}
+.assembly-sequence{position:absolute;z-index:1;left:50%;top:50%;width:min(78vw,960px);height:min(34vw,390px);min-height:160px;transform:translate(-50%,-50%);pointer-events:none;overflow:visible;mix-blend-mode:screen}
+.assembly-orbit{position:absolute;left:50%;top:50%;width:66%;height:52%;border:2px solid rgba(56,221,255,.0);border-radius:50%;box-shadow:0 0 18px rgba(35,213,255,0);transform:translate(-50%,-50%);animation:assemblyOrbit 4.8s cubic-bezier(.18,.7,.2,1) both}
+.orbit-a{border-top-color:rgba(58,226,255,.95);border-bottom-color:rgba(150,91,255,.7)}
+.orbit-b{width:54%;height:80%;border-left-color:rgba(75,208,255,.85);border-right-color:rgba(170,92,255,.8);animation-name:assemblyOrbitB}
+.assembly-part{position:absolute;left:50%;top:50%;display:block;width:clamp(28px,5vw,72px);height:clamp(28px,5vw,72px);border:1px solid rgba(131,232,255,.95);background:linear-gradient(135deg,rgba(32,214,255,.3),rgba(107,65,255,.13));box-shadow:0 0 16px rgba(41,207,255,.36),inset 0 0 12px rgba(255,255,255,.18);opacity:0;clip-path:polygon(25% 0,75% 0,100% 25%,100% 75%,75% 100%,25% 100%,0 75%,0 25%);}
+.part-top{--dx:0;--dy:-1;animation:assembleTop 4.8s cubic-bezier(.16,.78,.2,1) both}
+.part-bottom{--dx:0;--dy:1;animation:assembleBottom 4.8s cubic-bezier(.16,.78,.2,1) both}
+.part-left{--dx:-1;--dy:0;animation:assembleLeft 4.8s cubic-bezier(.16,.78,.2,1) both}
+.part-right{--dx:1;--dy:0;animation:assembleRight 4.8s cubic-bezier(.16,.78,.2,1) both}
+.assembly-core{position:absolute;left:50%;top:50%;width:clamp(16px,2.2vw,34px);height:clamp(16px,2.2vw,34px);border-radius:50%;background:radial-gradient(circle,#fff 0 10%,#a9f4ff 22%,#2bdcff 42%,rgba(115,75,255,.2) 70%,transparent 72%);box-shadow:0 0 14px #4ce7ff,0 0 42px rgba(94,104,255,.9);opacity:0;transform:translate(-50%,-50%) scale(.1);animation:coreIgnition 4.8s ease-out both}
+.assembly-flash{position:absolute;left:50%;top:50%;width:6%;height:2px;background:#fff;box-shadow:0 0 22px 8px rgba(96,225,255,.8);opacity:0;transform:translate(-50%,-50%) scaleX(.1);animation:assemblyFlash 4.8s ease-out both}
+@keyframes assemblyOrbit{0%,10%{opacity:0;transform:translate(-50%,-50%) rotate(-25deg) scale(.35)}22%{opacity:.95}42%{opacity:.8;transform:translate(-50%,-50%) rotate(8deg) scale(1.04)}66%{opacity:.25;transform:translate(-50%,-50%) rotate(0) scale(1.22)}100%{opacity:0;transform:translate(-50%,-50%) rotate(0) scale(1.4)}}
+@keyframes assemblyOrbitB{0%,12%{opacity:0;transform:translate(-50%,-50%) rotate(35deg) scale(.4)}26%{opacity:.85}46%{opacity:.7;transform:translate(-50%,-50%) rotate(-12deg) scale(1)}68%{opacity:.18;transform:translate(-50%,-50%) rotate(0) scale(1.18)}100%{opacity:0;transform:translate(-50%,-50%) rotate(0) scale(1.35)}}
+@keyframes assembleTop{0%,9%{opacity:0;transform:translate(-50%,-50%) translateY(-145px) rotate(45deg)}23%{opacity:1}42%{opacity:.9;transform:translate(-50%,-50%) translateY(-24px) rotate(12deg)}51%{opacity:.75;transform:translate(-50%,-50%) translateY(-9px) rotate(0)}70%,100%{opacity:0;transform:translate(-50%,-50%) translateY(-9px) rotate(0)}}
+@keyframes assembleBottom{0%,9%{opacity:0;transform:translate(-50%,-50%) translateY(145px) rotate(-45deg)}23%{opacity:1}42%{opacity:.9;transform:translate(-50%,-50%) translateY(24px) rotate(-12deg)}51%{opacity:.75;transform:translate(-50%,-50%) translateY(9px) rotate(0)}70%,100%{opacity:0;transform:translate(-50%,-50%) translateY(9px) rotate(0)}}
+@keyframes assembleLeft{0%,9%{opacity:0;transform:translate(-50%,-50%) translateX(-220px) rotate(-45deg)}23%{opacity:1}42%{opacity:.9;transform:translate(-50%,-50%) translateX(-42px) rotate(-12deg)}51%{opacity:.75;transform:translate(-50%,-50%) translateX(-12px) rotate(0)}70%,100%{opacity:0;transform:translate(-50%,-50%) translateX(-12px) rotate(0)}}
+@keyframes assembleRight{0%,9%{opacity:0;transform:translate(-50%,-50%) translateX(220px) rotate(45deg)}23%{opacity:1}42%{opacity:.9;transform:translate(-50%,-50%) translateX(42px) rotate(12deg)}51%{opacity:.75;transform:translate(-50%,-50%) translateX(12px) rotate(0)}70%,100%{opacity:0;transform:translate(-50%,-50%) translateX(12px) rotate(0)}}
+@keyframes coreIgnition{0%,38%{opacity:0;transform:translate(-50%,-50%) scale(.1)}48%{opacity:1;transform:translate(-50%,-50%) scale(1.5)}55%{opacity:.95;transform:translate(-50%,-50%) scale(.9)}68%,100%{opacity:0;transform:translate(-50%,-50%) scale(2.4)}}
+@keyframes assemblyFlash{0%,45%{opacity:0;transform:translate(-50%,-50%) scaleX(.1)}49%{opacity:.95;transform:translate(-50%,-50%) scaleX(12)}57%{opacity:0;transform:translate(-50%,-50%) scaleX(18)}100%{opacity:0}}
+@media(max-width:767px),(orientation:portrait){.assembly-sequence{width:94vw;height:44vw;min-height:140px}.assembly-part{width:clamp(24px,7vw,46px);height:clamp(24px,7vw,46px)}@keyframes assembleTop{0%,9%{opacity:0;transform:translate(-50%,-50%) translateY(-82px) rotate(45deg)}23%{opacity:1}42%{opacity:.9;transform:translate(-50%,-50%) translateY(-18px) rotate(12deg)}51%{opacity:.75;transform:translate(-50%,-50%) translateY(-7px) rotate(0)}70%,100%{opacity:0;transform:translate(-50%,-50%) translateY(-7px) rotate(0)}}@keyframes assembleBottom{0%,9%{opacity:0;transform:translate(-50%,-50%) translateY(82px) rotate(-45deg)}23%{opacity:1}42%{opacity:.9;transform:translate(-50%,-50%) translateY(18px) rotate(-12deg)}51%{opacity:.75;transform:translate(-50%,-50%) translateY(7px) rotate(0)}70%,100%{opacity:0;transform:translate(-50%,-50%) translateY(7px) rotate(0)}}@keyframes assembleLeft{0%,9%{opacity:0;transform:translate(-50%,-50%) translateX(-110px) rotate(-45deg)}23%{opacity:1}42%{opacity:.9;transform:translate(-50%,-50%) translateX(-30px) rotate(-12deg)}51%{opacity:.75;transform:translate(-50%,-50%) translateX(-9px) rotate(0)}70%,100%{opacity:0;transform:translate(-50%,-50%) translateX(-9px) rotate(0)}}@keyframes assembleRight{0%,9%{opacity:0;transform:translate(-50%,-50%) translateX(110px) rotate(45deg)}23%{opacity:1}42%{opacity:.9;transform:translate(-50%,-50%) translateX(30px) rotate(12deg)}51%{opacity:.75;transform:translate(-50%,-50%) translateX(9px) rotate(0)}70%,100%{opacity:0;transform:translate(-50%,-50%) translateX(9px) rotate(0)}}}
+@media(prefers-reduced-motion:reduce){.assembly-sequence{display:none!important}}
+
+
+/* Actual Concept 2 mechanical-assembly animation as a first-visit page-load intro. */
+.novax-intro{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#030a16;opacity:1;visibility:visible;transition:opacity .55s ease,visibility .55s ease}
+.novax-intro.is-done{opacity:0;visibility:hidden;pointer-events:none}
+.novax-intro__video{display:block;width:100%;height:100%;object-fit:contain;background:#030a16}
+.novax-intro__skip{position:absolute;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));padding:10px 14px;border:1px solid rgba(255,255,255,.35);border-radius:999px;background:rgba(3,10,22,.72);color:#fff;font:600 11px/1 Arial,sans-serif;letter-spacing:.12em;cursor:pointer}
+.novax-intro__skip:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.novax-intro{display:none!important}}
+
 </style>
 </head>
 <body>
+<div class="novax-intro" id="novaxIntro" role="presentation" aria-label="NovaX introduction">
+  <video id="novaxIntroVideo" class="novax-intro__video" autoplay muted playsinline preload="auto" aria-hidden="true">
+    <source src="assets/novax-concept2-intro-1080p.mp4" type="video/mp4">
+  </video>
+  <button class="novax-intro__skip" id="novaxIntroSkip" type="button" aria-label="Skip introduction">SKIP INTRO</button>
+</div>
 <main class="landing-page" aria-label="NovaX™ landing page">
   <section class="landing-stage" aria-label="NovaX™ introduction">
     <img class="landing-art landing-art--portrait" src="assets/NovaX_LOCKED_PORTRAIT_REFERENCE.png" alt="NovaX™ — Building the Parallel Economy™. What would you do with $50K?">
     <img class="landing-art landing-art--landscape" src="assets/NovaX_LOCKED_LANDSCAPE_REFERENCE.png" alt="" aria-hidden="true">
+
     <div class="landing-tagline" aria-label="Building the Parallel Economy">BUILDING THE PARALLEL ECONOMY™</div>
     <a class="landing-cta" href="quiz.html" aria-label="Let's begin the NovaX™ quiz"><span class="sr-only">LET’S BEGIN →</span></a>
   </section>
@@ -85,5 +134,24 @@ body{min-height:100svh;overflow-x:hidden}
     <a href="terms.html">Terms</a>
   </nav>
 </main>
+<script>
+(function(){
+  const overlay=document.getElementById('novaxIntro');
+  const video=document.getElementById('novaxIntroVideo');
+  const skip=document.getElementById('novaxIntroSkip');
+  if(!overlay||!video)return;
+  const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let finished=false;
+  function finish(){if(finished)return;finished=true;overlay.classList.add('is-done');window.setTimeout(()=>{overlay.remove();},650);try{video.pause();}catch(e){}}
+  if(reduced){finish();return;}
+  video.addEventListener('ended',finish,{once:true});
+  video.addEventListener('error',finish,{once:true});
+  skip&&skip.addEventListener('click',finish);
+  // Some browsers may block autoplay; don't hold the homepage behind a stalled intro.
+  const timeout=window.setTimeout(finish,7500);
+  video.addEventListener('ended',()=>window.clearTimeout(timeout),{once:true});
+  const play=video.play();if(play&&typeof play.catch==='function')play.catch(finish);
+})();
+</script>
 </body>
 </html>

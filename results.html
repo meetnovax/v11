@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NovaX™ — Builder Results</title>
-<meta name="description" content="Your NovaX™ Builder Profile, Builder Score™, Builder Card, Path progression, and next step.">
+<meta name="description" content="Discover your NovaX™ Builder archetype and share your Builder Card.">
 <meta property="og:title" content="NovaX™ — Builder Results">
 <meta property="og:description" content="Discover your NovaX™ Builder Profile and share your Builder Card.">
 <meta property="og:image" content="assets/results-hero-art-clean.png">
@@ -86,13 +86,42 @@
 .results-gradient-button:active,.card-action:active,.results-chip-button:active{transform:translateY(0) scale(.99)}
 @media(prefers-reduced-motion:reduce){.results-topnav,.results-hero-copy,.results-hero-art,.results-card-panel,.results-side-panel,.results-next-step,.results-detail-panel{animation:none!important}.results-gradient-button,.card-action,.results-chip-button{transition:none!important}}
 
+
+/* v58: simplified Results flow and readable, fluid Builder Card */
+.topnav{gap:12px;padding-inline:clamp(16px,4vw,44px)}
+.navlinks{display:none!important}
+.account{margin-left:auto;flex:0 0 auto}
+.hero-desc{color:#f0f5fc;font-size:clamp(14px,1.15vw,16px);line-height:1.7;max-width:500px}
+.main-grid{display:block;max-width:940px;margin:clamp(14px,2.4vw,28px) auto;padding:0 clamp(12px,3vw,24px)}
+.card-panel{padding:clamp(16px,3vw,30px)}
+.panel-head{align-items:flex-start}
+.panel-head h2{font-size:clamp(22px,2.4vw,30px);line-height:1.22;max-width:620px}
+.card-layout{grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:clamp(18px,4vw,44px);align-items:center;justify-content:center}
+.builder-card{width:min(340px,100%)}
+.card-quote{font-size:clamp(10px,3.2cqw,13px);line-height:1.4;max-height:18%;bottom:11%;left:9%;right:9%;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;text-wrap:pretty;text-shadow:0 1px 5px rgba(0,0,0,.8)}
+.card-traits{gap:clamp(4px,1.5cqw,10px);bottom:3.2%}
+.card-trait{font-size:clamp(7px,2.15cqw,10px);gap:5px;white-space:normal;line-height:1.1;justify-content:center;text-align:left;flex:1}
+.card-trait b{overflow-wrap:anywhere}
+.card-trait i{width:clamp(14px,5.2cqw,22px);height:clamp(14px,5.2cqw,22px);flex-basis:clamp(14px,5.2cqw,22px)}
+.card-actions{width:min(340px,100%);grid-template-columns:1.35fr 1fr .6fr;gap:8px}
+.action{font-size:clamp(9px,1vw,11px);letter-spacing:.045em;padding:0 7px}
+.share-note{font-size:12px;line-height:1.5;color:#b8c8dc;max-width:340px;margin:12px auto 0}
+.profile-summary,.side-stack,.next,.detail-grid{display:none!important}
+.journey-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(32,216,255,.75),rgba(155,92,255,.65),transparent);margin:clamp(22px,4vw,36px) 0 18px}
+.journey-note{text-align:center;color:#c9d7e8;font-size:clamp(13px,1.2vw,15px);line-height:1.6;margin:0 auto 18px;max-width:560px}
+.journey-cta{display:flex;align-items:center;justify-content:center;gap:12px;width:min(390px,100%);min-height:54px;margin:0 auto;text-decoration:none;text-align:center;border:1px solid rgba(32,216,255,.8);border-radius:10px;background:linear-gradient(100deg,#12aeda,#5147e8 70%,#7549d8);color:white;font-size:clamp(12px,1.15vw,14px);font-weight:800;letter-spacing:.08em;box-shadow:0 10px 30px rgba(32,140,255,.18);transition:filter .2s,transform .2s,box-shadow .2s}
+.journey-cta:hover,.journey-cta:focus-visible{filter:brightness(1.12);transform:translateY(-1px);box-shadow:0 12px 34px rgba(32,140,255,.3)}
+@media(max-width:700px){.topnav{padding:0 14px}.brand-lockup img{width:104px}.brand-phrase{display:inline;font-size:9px;letter-spacing:.07em;white-space:normal;max-width:125px;line-height:1.25}.hero-desc{font-size:14px;line-height:1.65}.main-grid{margin:12px 0;padding:0 12px}.card-panel{padding:17px 14px}.panel-head{gap:8px}.panel-head h2{font-size:23px}.share-chip{display:none}.card-layout{grid-template-columns:minmax(0,1fr);gap:18px;padding-top:18px}.builder-card{width:min(360px,100%)}.card-actions{width:min(360px,100%)}.card-quote{font-size:clamp(10px,3.3cqw,13px);line-height:1.38;max-height:18%}.card-trait{font-size:clamp(7px,2.15cqw,10px)}.journey-divider{margin-top:24px}}
+@media(max-width:380px){.brand-lockup{gap:0}.brand-lockup img{width:88px}.brand-phrase{font-size:8px;max-width:105px}.card-actions{grid-template-columns:1.2fr 1fr .55fr;gap:5px}.action{font-size:8px;padding:0 4px}.panel-head h2{font-size:21px}}
+@media(prefers-reduced-motion:reduce){.journey-cta{transition:none}}
+
 </style>
 </head>
 <body>
 <div class="page">
 <header class="topnav">
   <a class="brand-lockup" href="index.html"><img src="assets/NovaX_APPROVED_LOGO_ASSET.png" alt="NovaX™"><span class="brand-phrase">Build Your Tomorrow™</span></a>
-  <nav class="navlinks" aria-label="Results navigation"><a href="index.html">Home</a><a href="quiz.html">Quiz</a><a href="hub.html">Hub</a><a href="about.html">About</a><a href="faq.html">FAQ</a></nav>
+  
   <a class="account" href="hub.html"><span class="avatar" id="avatar">B</span><span><strong id="accountName">Builder</strong><small>Builder</small></span></a>
 </header>
 <main id="results" hidden>
@@ -114,7 +143,7 @@
 </section>
 <section class="main-grid">
   <article class="panel card-panel" id="builder-card">
-    <div class="panel-head"><div><span class="eyebrow">YOUR BUILDER CARD</span><h2>Share &amp; Show the world what kind of Builder you are.</h2></div><button class="share-chip" id="topShare" type="button">SHARE ↗</button></div>
+    <div class="panel-head"><div><span class="eyebrow">YOUR BUILDER CARD</span><h2>Own your Builder identity. Share what you’re here to build.</h2></div><button class="share-chip" id="topShare" type="button">SHARE ↗</button></div>
     <div class="card-layout">
       <div class="builder-card-wrap">
         <div class="builder-card" id="builderCard" aria-label="Your NovaX Builder Card">
@@ -128,40 +157,17 @@
           <div class="card-quote" id="cardQuote"></div>
         </div>
         <div class="card-actions"><button class="action primary" id="shareCard" type="button">SHARE CARD</button><button class="action secondary" id="saveCard" type="button">SAVE CARD</button><button class="action secondary" id="showQr" type="button">QR</button></div>
-        <div class="share-note">Your unique Invite Link is automatically included when you share.</div>
       </div>
-      <div class="profile-summary">
-        <span class="eyebrow">YOUR BUILDER PROFILE</span>
-        <div class="stat"><span>Builder Type</span><strong id="summaryType">—</strong></div>
-        <div class="stat"><span>Builder Score™</span><strong id="summaryScore">— / 100</strong></div>
-        <div class="stat"><span>Top Strengths</span><strong id="strengthSummary">—</strong></div>
-        <div class="stat"><span>Growth Area</span><strong id="challengeSummary">—</strong></div>
-      </div>
+
     </div>
+    <div class="journey-divider" role="separator" aria-hidden="true"></div>
+    <p class="journey-note">Your unique invite link is automatically included when you share.</p>
+    <a class="journey-cta" href="hub.html">CONTINUE YOUR JOURNEY <span aria-hidden="true">→</span></a>
   </article>
-  <aside class="side-stack">
-    <article class="panel side">
-      <span class="eyebrow">YOUR INVITE PROGRESS</span>
-      <div class="invite-count"><strong id="inviteCount">0</strong><span>Confirmed Invites</span></div>
-      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-      <div class="progress-markers"><span class="progress-marker" id="marker5"></span><span class="progress-marker" id="marker15"></span><span class="progress-marker" id="marker25"></span></div>
-      <p id="inviteNote">5 more Confirmed Invites to unlock your first Path.</p>
-      <button class="gradient-btn" id="inviteButton" type="button">INVITE BUILDERS →</button>
-    </article>
-    <article class="panel side">
-      <span class="eyebrow">EXPLORE THE THREE PATHS</span><p>The Paths represent deeper participation as NovaX™ evolves.</p>
-      <div class="paths">
-        <div class="path steward" id="pathSteward"><span class="path-icon">◈</span><div><strong>STEWARD™</strong><small id="stewardCopy">Unlocks at 5 confirmed invites.</small></div><em id="stewardState">LOCKED</em></div>
-        <div class="path sentinel" id="pathSentinel"><span class="path-icon">⬡</span><div><strong>SENTINEL™</strong><small id="sentinelCopy">Unlocks at 15 confirmed invites.</small></div><em id="sentinelState">LOCKED</em></div>
-        <div class="path vanguard" id="pathVanguard"><span class="path-icon">△</span><div><strong>VANGUARD™</strong><small id="vanguardCopy">Unlocks at 25 confirmed invites.</small></div><em id="vanguardState">LOCKED</em></div>
-      </div>
-    </article>
-  </aside>
+
 </section>
-<section class="panel next"><div><span class="eyebrow">YOUR NEXT STEP</span><h2>Welcome to NovaX™</h2><p>Your Builder Journey™ starts here. Access the Hub to explore your profile, learn more, and see what's next.</p></div><button class="gradient-btn" id="goHub" type="button">ACCESS HUB →</button></section>
-<section class="detail-grid"><article class="panel detail"><span class="eyebrow">YOUR STRENGTHS</span><ul id="strengths"></ul></article><article class="panel detail"><span class="eyebrow">YOUR CHALLENGE</span><p id="challenge"></p></article><article class="panel detail"><span class="eyebrow">YOUR NOVAX™ DIRECTION</span><div class="direction" id="direction"></div></article></section>
 </main>
-<footer class="footer">Copyright © 2026 NovaX™ · <a href="index.html">Home</a> · <a href="quiz.html">Quiz</a> · <a href="hub.html">Hub</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="about.html">About</a> · <a href="faq.html">FAQ</a></footer>
+<footer class="footer">Copyright © 2026 NovaX™</footer>
 </div>
 <div class="overlay hidden" id="qrOverlay" aria-hidden="true"><div class="sheet"><span class="eyebrow">SHARE IN PERSON</span><h3>Your NovaX™ Invite QR</h3><p>Scan this code to open your unique Invite Link.</p><img class="qr" id="qrImage" alt="Your NovaX™ Invite QR code"><div id="qrUrl" style="font-size:9px;color:#71869e;word-break:break-all"></div><button class="close" id="qrClose" type="button">CLOSE</button></div></div>
 <script src="assets/novax-archetypes.js"></script>
@@ -190,10 +196,7 @@ function render(){
  ["traitOne","traitTwo","traitThree"].forEach((id,i)=>{el(id).textContent=heroTraits[i]||"Your strengths";el(id+"Copy").textContent="One of your core Builder strengths"});
  el("cardTitle").textContent=p.title.toUpperCase()+"™";const brandLogo=el("cardBrandLogo");if(brandLogo)brandLogo.src="assets/NovaX_APPROVED_LOGO_ASSET.png";const archetypeIcon=el("cardArchetypeIcon");if(archetypeIcon){archetypeIcon.src=`assets/builder-icon-${profile.toLowerCase()}.png`;archetypeIcon.alt=`${p.title}™ icon`;}el("cardName").textContent=name;el("cardScore").textContent=score;el("cardQuote").textContent=`“${cardQuotes[profile]}”`;
  const strengthMarkerFiles={"Vision":"assets/strength-markers/01-01-Big-picture-thinking.png","Opportunity":"assets/strength-markers/01-02-Opportunity-recognition.png","Ambition":"assets/strength-markers/01-03-Ambition.png","Execution":"assets/strength-markers/02-01-Execution.png","Ownership":"assets/strength-markers/02-02-Ownership.png","Momentum":"assets/strength-markers/02-03-Momentum.png","Create":"assets/strength-markers/03-01-Creation.png","Solve":"assets/strength-markers/03-02-Problem-solving.png","Build":"assets/strength-markers/03-03-Making-ideas-real.png","Relationships":"assets/strength-markers/04-01-Relationships.png","Connection":"assets/strength-markers/04-02-Connection.png","Collaboration":"assets/strength-markers/04-03-Collaboration.png","Curiosity":"assets/strength-markers/05-01-Curiosity.png","Potential":"assets/strength-markers/05-02-Potential.png","Discovery":"assets/strength-markers/05-03-Self-discovery.png"};const markerFor=t=>strengthMarkerFiles[t]||"";heroTraits.forEach((t,i)=>{const icon=el(["traitIconOne","traitIconTwo","traitIconThree"][i]);if(icon)icon.style.backgroundImage=markerFor(t)?`url("${markerFor(t)}")`:"none";});el("cardTraits").innerHTML=p.strengths.slice(0,3).map(t=>`<span class="card-trait"><i aria-hidden="true" style="background-image:url('${markerFor(t)}')"></i><b>${esc(t)}</b></span>`).join("");
- el("summaryType").textContent=p.title+"™";el("summaryScore").textContent=`${score} / 100`;el("strengthSummary").textContent=topStrengthCopy[profile]||p.strengths.slice(0,3).join(", ");el("challengeSummary").textContent=p.challenge;el("strengths").innerHTML=p.strengths.map(x=>`<li>${esc(x)}</li>`).join("");el("challenge").textContent=p.challenge;el("direction").textContent=p.path;
- el("inviteCount").textContent=count.toLocaleString();const next=count<5?5:count<15?15:count<25?25:50;el("progressFill").style.width=`${Math.min(count/next,1)*100}%`;
- el("inviteNote").textContent=count<5?`${5-count} more Confirmed Invite${5-count===1?"":"s"} to unlock your first Path.`:count<15?`${15-count} more Confirmed Invite${15-count===1?"":"s"} to unlock Sentinel Path™.`:count<25?`${25-count} more Confirmed Invite${25-count===1?"":"s"} to unlock Vanguard Path™.`:"All three initial Path thresholds unlocked. Keep building toward Founder Rewards.";
- [[5,"pathSteward","stewardCopy","stewardState","Build with purpose and discover what’s next."],[15,"pathSentinel","sentinelCopy","sentinelState","Connect, contribute, and strengthen the network."],[25,"pathVanguard","vanguardCopy","vanguardState","Lead what comes next."]].forEach(([n,id,copy,stateId,unlockedCopy])=>{const unlocked=count>=n;el(id).classList.toggle("unlocked",unlocked);el(copy).textContent=unlocked?unlockedCopy:`Unlocks at ${n} confirmed invites.`;el(stateId).textContent=unlocked?"UNLOCKED":"LOCKED";el("marker"+n).classList.toggle("earned",unlocked)});
+ 
  el("results").hidden=false;
 }
 function copyText(text){if(navigator.clipboard?.writeText)return navigator.clipboard.writeText(text);const ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove();return Promise.resolve()}
@@ -216,7 +219,7 @@ async function buildCardCanvas(){
 async function buildCardFile(){const c=await buildCardCanvas();return new File([await new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(new Error("Card export failed")),"image/png"))],`NovaX-${profile}-Builder-Card.png`,{type:"image/png"})}
 function openQr(){const url=inviteUrl();el("qrImage").src=`https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(url)}`;el("qrUrl").textContent=url;el("qrOverlay").classList.remove("hidden");el("qrOverlay").setAttribute("aria-hidden","false")}
 function closeQr(){el("qrOverlay").classList.add("hidden");el("qrOverlay").setAttribute("aria-hidden","true")}
-el("shareCard").onclick=shareCard;el("topShare").onclick=shareCard;el("saveCard").onclick=async()=>{try{const file=await buildCardFile();const a=document.createElement("a");a.href=URL.createObjectURL(file);a.download=file.name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000)}catch(e){alert("Sorry — the Builder Card could not be saved.")}};el("showQr").onclick=openQr;el("qrClose").onclick=closeQr;el("qrOverlay").onclick=e=>{if(e.target===el("qrOverlay"))closeQr()};el("inviteButton").onclick=shareCard;el("goHub").onclick=()=>location.href="hub.html";document.addEventListener("keydown",e=>{if(e.key==="Escape")closeQr()});render();
+el("shareCard").onclick=shareCard;el("saveCard").onclick=async()=>{try{const file=await buildCardFile();const a=document.createElement("a");a.href=URL.createObjectURL(file);a.download=file.name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000)}catch(e){alert("Sorry — the Builder Card could not be saved.")}};el("showQr").onclick=openQr;el("qrClose").onclick=closeQr;el("qrOverlay").onclick=e=>{if(e.target===el("qrOverlay"))closeQr()};document.addEventListener("keydown",e=>{if(e.key==="Escape")closeQr()});render();
 }
 </script>
 </body>
